@@ -46,9 +46,13 @@ public class ArrowPile {
         
         for (i = 0; i < totalPlayers; i++){
             while (players.playerOrder[i].arrows > 0){
-                if (players.playerOrder[i].lifePoints > 0){
+                if ("Jourdonnais".equals(players.playerOrder[i].name)){
+                    players.playerOrder[i].lose_life(players, this, true);
+                    players.playerOrder[i].arrows = 0;
+                }
+                else if (players.playerOrder[i].lifePoints > 0){
                     players.playerOrder[i].lose_arrow();
-                    players.playerOrder[i].lose_life(players, this);
+                    players.playerOrder[i].lose_life(players, this, true);
                 }
             }
         }
