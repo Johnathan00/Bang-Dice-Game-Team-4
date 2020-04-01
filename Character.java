@@ -138,7 +138,7 @@ public class Character {
     public static String [] select_role (int num){
         switch (num){
             case 2:
-                String roles2 [] = {"Sheriff", "Renegade", "Outlaw"};
+                String roles2 [] = {"Deputy", "Renegade", "Outlaw"};
                 roles2 = Character.shuffle_roles(roles2, num);
                 return roles2;
             case 3:
@@ -228,7 +228,7 @@ public class Character {
         if (this.lifePoints < 1){
             System.out.println(this.name + " has run out of life points and has lost the game.");
             System.out.println("Their role was " + this.role);
-            playerOrder.eliminate_player(this, arrowPile);
+            playerOrder.eliminate_player(this, arrowPile, !arrowOrDynamite);
         }
     }
 }
