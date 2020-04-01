@@ -43,7 +43,6 @@ public class BangDiceGame {
         totalPlayers = aiPlayers + 1;
         
         roles = Character.select_role(aiPlayers);
-        System.out.println(roles[0]);
         
         int i = 0;
         
@@ -84,9 +83,11 @@ public class BangDiceGame {
         i = 0;
         
         //Making the sheriff the first player to go
-        while (!"Sheriff".equals(players[i].role)){
-            playerOrder.next_turn();
-            i++;
+        if (playerOrder.numOfPlayers > 3){
+            while (!"Sheriff".equals(players[i].role)){
+                playerOrder.next_turn();
+                i++;
+            }
         }
         
         System.out.println();
@@ -99,7 +100,7 @@ public class BangDiceGame {
         
         
         
-        while (!playerOrder.game_over()){
+        while (!playerOrder.game_over){
             i = 0;
             dynamiteExecuted = false;
             gatlingExecuted = false;
@@ -131,10 +132,15 @@ public class BangDiceGame {
             
             //Determines if the first roll contains any arrows
             for (i = 0; i < 5; i ++){
-                if (!playerOrder.game_over()){
+                if (!playerOrder.game_over){
                     if ("Arrow".equals(allDice[i].roll)){
                         System.out.println("You rolled an arrow. You must pick up an arrow before continuing.");
                         Dice.arrow_roll(playerOrder.get_current_player(), arrowPile, playerOrder);
+                    }
+                    if ("Dynamite".equals(allDice[i].roll)){
+                        if (!dynamiteExecuted){
+                            dynamiteExecuted = Dice.dynamite_roll(allDice, playerOrder.get_current_player(), playerOrder, arrowPile);  
+                        }
                     }
                 }
             }
@@ -152,7 +158,6 @@ public class BangDiceGame {
                     if ("Dynamite".equals(allDice[i].roll)){
                         if (!dynamiteExecuted){
                             dynamiteExecuted = Dice.dynamite_roll(allDice, playerOrder.get_current_player(), playerOrder, arrowPile);
-                            
                         }
                     }
                 }
@@ -169,7 +174,7 @@ public class BangDiceGame {
             
             //Completes all of the dice rolls
             for (i = 0; i < 5; i ++){
-                if (!playerOrder.game_over()){
+                if (!playerOrder.game_over){
                     if ("Dynamite".equals(allDice[i].roll)){
                         if (!dynamiteExecuted){
                             Dice.dynamite_roll(allDice, playerOrder.get_current_player(), playerOrder, arrowPile);
@@ -202,6 +207,7 @@ public class BangDiceGame {
                 if ("Slab the Killer".equals(playerOrder.get_current_player().name)){
                     if (numBeer > 0){
                         System.out.print("Would you like to double the damage of your Bull's Eye 1 for 1 beer? (Y/N): ");
+                        input.nextLine();
                         tempDoubleDamage = input.nextLine().charAt(0);
                         while (tempDoubleDamage != 'y' && tempDoubleDamage != 'Y' && tempDoubleDamage != 'n' && tempDoubleDamage != 'N'){
                             System.out.print("Invalid input. Please try again (Y/N): ");
@@ -223,6 +229,7 @@ public class BangDiceGame {
                 if ("Slab the Killer".equals(playerOrder.get_current_player().name)){
                     if (numBeer > 0){
                         System.out.print("Would you like to double the damage of your Bull's Eye 2 for 1 beer? (Y/N): ");
+                        input.nextLine();
                         tempDoubleDamage = input.nextLine().charAt(0);
                         while (tempDoubleDamage != 'y' && tempDoubleDamage != 'Y' && tempDoubleDamage != 'n' && tempDoubleDamage != 'N'){
                             System.out.print("Invalid input. Please try again (Y/N): ");
@@ -262,8 +269,8 @@ public class BangDiceGame {
             //Goes to next player
             playerOrder.next_turn();
             
-            System.out.println("\n*** Press enter to progress to the next turn. ***");
             input.nextLine();
+            System.out.println("\n*** Press enter to progress to the next turn. ***");
             input.nextLine();
             
             System.out.println("\n--------------------------------------------------\n");
