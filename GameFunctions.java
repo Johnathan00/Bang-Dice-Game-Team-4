@@ -27,6 +27,7 @@ public class GameFunctions {
         return this.playerOrder[this.currentPlayer];
     }
     
+    //gets player 1 to the right
     public Character get_next_player (){
         int temp;
         temp = (this.currentPlayer + 1)%this.numOfPlayers;
@@ -38,6 +39,7 @@ public class GameFunctions {
         return this.playerOrder[temp];
     }
     
+    //gets player 1 to the left
     public Character get_previous_player (){
         int temp;
         temp = (this.currentPlayer - 1)%this.numOfPlayers;
@@ -49,6 +51,7 @@ public class GameFunctions {
         return this.playerOrder[temp];
     }
     
+    //gets player 2 to the right
     public Character get_two_away_player (Character currentPlayer){
         int temp;
         temp = (this.currentPlayer + 2)%this.numOfPlayers;
@@ -67,6 +70,7 @@ public class GameFunctions {
         }
     }
     
+    //gets player 2 to the left
     public Character get_two_before_player (Character currentPlayer){
         int temp;
         temp = (this.currentPlayer - 2)%this.numOfPlayers;
@@ -104,17 +108,19 @@ public class GameFunctions {
         
         this.numOfPlayers -= 1;
         
+        for (i = 0; i < this.numOfPlayers; i++){
+            if ("Vulture Sam".equals(this.playerOrder[i].name)){
+               this.playerOrder[i].gain_life();
+               this.playerOrder[i].gain_life();
+            }
+        }
+        
         if (numOfPlayers == 1){
             System.out.println(this.playerOrder[1].name + " is the last character remaining");
         } 
     }
     
     public boolean game_over (){
-        if (this.numOfPlayers > 1){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return this.numOfPlayers <= 1;
     }
 }
