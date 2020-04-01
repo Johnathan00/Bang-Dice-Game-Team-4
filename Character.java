@@ -186,13 +186,13 @@ public class Character {
         }
     }
     
-    public void lose_life (GameFunctions playerOrder, ArrowPile arrowPile){
+    public void lose_life (GameFunctions playerOrder, ArrowPile arrowPile, Boolean arrowOrDynamite){
         String choice;
         
         Scanner input = new Scanner(System.in);
         
-        if ("Bart Cassidy".equals(this.name) && "Bart Cassidy".equals(playerOrder.playerOrder[0].name)){
-            if (!arrowPile.pileIsEmpty()){
+        if ("Bart Cassidy".equals(this.name) && !arrowOrDynamite){
+            if (arrowPile.remaining > 1){
                 System.out.print("Bart Cassidy, would you like to lose a 'life point' or take an 'arrow'? : ");
                 choice = input.nextLine();
                 
@@ -216,6 +216,13 @@ public class Character {
         
         else{ 
             this.lifePoints -= 1;
+        }
+        
+        if ("Pedro Ramirez".equals(this.name)){
+            if (this.arrows > 0){
+                arrowPile.add_arrow(this);
+                System.out.println("Pedro Ramirez lost a life point, so he discarded an arrow.");
+            }
         }
         
         if (this.lifePoints < 1){
