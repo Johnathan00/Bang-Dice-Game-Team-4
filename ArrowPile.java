@@ -1,12 +1,12 @@
 /*
- * Cierra Ditmore
+ * Meghan Engert
  * CS 2365
  */
 package bangdicegame;
 
 /**
  *
- * @author cmdma
+ * @author
  */
 public class ArrowPile {
     public int remaining;
