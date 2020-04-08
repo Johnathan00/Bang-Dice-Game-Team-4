@@ -1,2 +1,3 @@
 Johnathan Gressick: GUI
 Meghan Engert: UML Use Case Diagrams, UML Class Diagrams, CRC Cards
+Cierra Ditmore: Character and Game Functions Classes
