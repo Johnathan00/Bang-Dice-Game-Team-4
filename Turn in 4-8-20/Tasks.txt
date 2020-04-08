@@ -1,1 +1,2 @@
 Johnathan Gressick: GUI
+Meghan Engert: UML Use Case Diagrams, UML Class Diagrams, CRC Cards
