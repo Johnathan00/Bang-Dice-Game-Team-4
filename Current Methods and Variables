@@ -17,7 +17,7 @@ Dice Class:
   ((dice)).roll = type of role (String, ex "Arrow" or "Bull's Eye 1"
             all options: "Arrow", "Dynamite", "Bull's Eye 1", "Bull's Eye 2", "Beer", "Gatling"
   
-  ((dice)).role_dice() = assigns one of the six options randomly to the roll variable
+  ((dice)).roll_dice() = assigns one of the six options randomly to the roll variable
   Dice.reroll_dice(Dice array of all 6 dice, int rollsRemaining, arrowpile, playerOrder) = rerolls all dice up to three times, takes  
             user input
   Dice.arrow_roll (current player, arrowpile, playerOrder) = if the player rolled an arrow
