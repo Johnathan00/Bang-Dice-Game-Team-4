@@ -123,7 +123,6 @@ public class Dice {
     
     
     public static void arrow_roll(Character player, ArrowPile pile, GameFunctions playerOrder){
-        player.gain_arrow();
         pile.remove_arrow(playerOrder);
     }
     
@@ -165,7 +164,6 @@ public class Dice {
             }
             
             if ("El Gringo".equals(nextPlayer.name)){
-                playerOrder.get_current_player().gain_arrow();
                 arrowPile.remove_arrow(playerOrder);
                 System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
             }
@@ -207,7 +205,6 @@ public class Dice {
         }
         
         if ("El Gringo".equals(enteredPlayer)){
-            playerOrder.get_current_player().gain_arrow();
             arrowPile.remove_arrow(playerOrder);
             System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
         }
@@ -230,7 +227,6 @@ public class Dice {
                 }
             
             if ("El Gringo".equals(nextPlayer.name)){
-                playerOrder.get_current_player().gain_arrow();
                 arrowPile.remove_arrow(playerOrder);
                 System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
             }
@@ -273,7 +269,6 @@ public class Dice {
         }
         
         if ("El Gringo".equals(enteredPlayer)){
-            playerOrder.get_current_player().gain_arrow();
             arrowPile.remove_arrow(playerOrder);
             System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
         }
@@ -330,7 +325,6 @@ public class Dice {
         }
         
         if ("El Gringo".equals(enteredPlayer)){
-            playerOrder.get_current_player().gain_arrow();
             arrowPile.remove_arrow(playerOrder);
             System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
         }
@@ -387,7 +381,6 @@ public class Dice {
         }
         
         if ("El Gringo".equals(enteredPlayer)){
-            playerOrder.get_current_player().gain_arrow();
             arrowPile.remove_arrow(playerOrder);
             System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
         }
@@ -467,7 +460,6 @@ public class Dice {
                     playerOrder.playerOrder[i].lose_life(playerOrder, arrowPile, false);
                     
                     if ("El Gringo".equals(playerOrder.playerOrder[i].name)){
-                        playerOrder.get_current_player().gain_arrow();
                         arrowPile.remove_arrow(playerOrder);
                         System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
                     }
