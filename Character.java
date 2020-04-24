@@ -4,231 +4,367 @@
  */
 package bangdicegame;
 
-import java.util.Random;
 import java.util.Scanner;
 
 /**
  *
- * 
+ * @author cmdma
  */
-
-public class Character {
-    public int lifePoints, arrows, maxLife;
-    public String name, role;
+public class GameFunctions {
+    public Character [] playerOrder;
+    public int currentPlayer, numOfPlayers, originalNumOfPlayers;
+    public Boolean game_over;
     
-    
-    public Character(int selection){
-        this.arrows = 0;
-        this.role = "";
-        
-        
-        switch (selection){
-            case 1:
-                this.name = "Bart Cassidy";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 2:
-                this.name = "Black Jack";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 3:
-                this.name = "Calamity Janet";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 4:
-                this.name = "El Gringo";
-                this.lifePoints = 7;
-                this.maxLife = 7;
-                return;
-            case 5:
-                this.name = "Jesse Jones";
-                this.lifePoints = 9;
-                this.maxLife = 9;
-                return;
-            case 6:
-                this.name = "Jourdonnais";
-                this.lifePoints = 7;
-                this.maxLife = 7;
-                return;
-            case 7:
-                this.name = "Kit Carlson";
-                this.lifePoints = 7;
-                this.maxLife = 7;
-                return;
-            case 8:
-                this.name = "Lucky Duke";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 9:
-                this.name = "Paul Regret";
-                this.lifePoints = 9;
-                this.maxLife = 9;
-                return;
-            case 10:
-                this.name = "Pedro Ramirez";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 11:
-                this.name = "Rose Doolan";
-                this.lifePoints = 9;
-                this.maxLife = 9;
-                return;
-            case 12:
-                this.name = "Sid Ketchum";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 13:
-                this.name = "Slab the Killer";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 14:
-                this.name = "Suzy Lafayette";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-                return;
-            case 15:
-                this.name = "Vulture Sam";
-                this.lifePoints = 9;
-                this.maxLife = 9;
-                return;
-            case 16:
-                this.name = "Willy the Kid";
-                this.lifePoints = 8;
-                this.maxLife = 8;
-       }
+    public GameFunctions (Character [] players, int totalPlayers){
+        this.playerOrder = players;
+        this.currentPlayer = 0;
+        this.numOfPlayers = totalPlayers;
+        this.originalNumOfPlayers = totalPlayers;
+        this.game_over = false;
     }
     
-    public static int [] shuffle_character (int [] randomSelection){
-        Random rand = new Random();
-        int random;
-        for (int i = 0; i < 16; i++){
-            random = rand.nextInt(16);
-            int temp1 = randomSelection[random];
-            int temp2 = randomSelection [i];
-            randomSelection[i] = temp1;
-            randomSelection[random] = temp2;
-        }
-        return randomSelection;
+    public Character next_turn (){
+        this.currentPlayer = (this.currentPlayer + 1)%(this.numOfPlayers);
+        return this.playerOrder[this.currentPlayer];
     }
     
-    public static String [] shuffle_roles (String [] roles, int num){
-        Random rand = new Random();
-        int random;
+    public Character get_current_player (){
+        return this.playerOrder[this.currentPlayer];
+    }
+    
+    //gets player 1 to the right
+    public Character get_next_player (){
+        int temp;
+        temp = (this.currentPlayer + 1)%this.numOfPlayers;
         
-        
-        
-        for (int i = 0; i <= num; i++){
-            random = rand.nextInt(num);
-            String temp1 = roles[random];
-            String temp2 = roles [i];
-            roles[i] = temp1;
-            roles[random] = temp2;
+        if (temp < 0){
+            temp = this.numOfPlayers + temp;
         }
         
-        return roles;
+        return this.playerOrder[temp];
     }
     
-    public static String [] select_role (int num){
-        switch (num){
-            case 2:
-                String roles2 [] = {"Deputy", "Renegade", "Outlaw"};
-                roles2 = Character.shuffle_roles(roles2, num);
-                return roles2;
-            case 3:
-                String roles3 [] = {"Sheriff", "Renegade", "Outlaw", "Outlaw"};
-                roles3 = Character.shuffle_roles(roles3, num);
-                return roles3;
-            case 4:
-                String roles4 [] = {"Sheriff", "Renegade", "Outlaw", "Outlaw", "Deputy"};
-                roles4 = Character.shuffle_roles(roles4, num);
-                return roles4;
-            case 5:
-                String roles5 [] = {"Sheriff", "Renegade", "Outlaw", "Outlaw", "Outlaw", "Deputy"};
-                roles5 = Character.shuffle_roles(roles5, num);
-                return roles5;
-            case 6:
-                String roles6 [] = {"Sheriff", "Renegade", "Outlaw", "Outlaw", "Outlaw", "Deputy", "Deputy"};
-                roles6 = Character.shuffle_roles(roles6, num);
-                return roles6;
-            default:
-                String roles7 [] = {"Sheriff", "Renegade", "Renegade", "Outlaw", "Outlaw", "Outlaw", "Deputy", "Deputy"};
-                roles7 = Character.shuffle_roles(roles7, num);
-                return roles7;
-        }  
+    //gets player 1 to the left
+    public Character get_previous_player (){
+        int temp;
+        temp = (this.currentPlayer - 1)%this.numOfPlayers;
+        
+        if (temp < 0){
+            temp = this.numOfPlayers + temp;
+        }
+        
+        return this.playerOrder[temp];
     }
     
-    public void set_role (String role){
-        this.role = role;
-    }
-    
-    public void gain_arrow (){
-        this.arrows += 1;
-    }
-    
-    public void lose_arrow (){
-        this.arrows -= 1;
-    }
-    
-    public void gain_life (){
-        if (this.lifePoints < this.maxLife){
-            this.lifePoints += 1;
-            System.out.println(this.name + " gained 1 life point.");
+    //gets player 2 to the right
+    public Character get_two_away_player (Character currentPlayer){
+        int temp;
+        temp = (this.currentPlayer + 2)%this.numOfPlayers;
+        
+        if (temp < 0){
+            temp = this.numOfPlayers + temp;
+        }
+        
+        Character nextCharacter = this.playerOrder[temp];
+        
+        if (nextCharacter != currentPlayer){
+            return nextCharacter;
         }
         else {
-            System.out.println(this.name + " has full life points, so they could not gain another life point.");
+            return this.get_next_player();
         }
     }
     
-    public void lose_life (GameFunctions playerOrder, ArrowPile arrowPile, Boolean arrowOrDynamite){
-        String choice;
+    //gets player 2 to the left
+    public Character get_two_before_player (Character currentPlayer){
+        int temp;
+        temp = (this.currentPlayer - 2)%this.numOfPlayers;
         
+        if (temp < 0){
+            temp = this.numOfPlayers + temp;
+        }
+        
+        Character previousCharacter = this.playerOrder[temp];
+        
+        if (previousCharacter != currentPlayer){
+            return previousCharacter;
+        }
+        else {
+            return this.get_previous_player();
+        }
+    }
+    
+    public static void player_turn (GameFunctions playerOrder, Dice allDice[], ArrowPile arrowPile){
+        int i;
+        boolean dynamiteExecuted, gatlingExecuted, doubleDamage;
+        int numBullsEye1, numBullsEye2, numBeer, numGatling, rollsRemaining;
+        char tempDoubleDamage;
         Scanner input = new Scanner(System.in);
         
-        if ("Bart Cassidy".equals(this.name) && !arrowOrDynamite){
-            if (arrowPile.remaining > 1){
-                System.out.print("Bart Cassidy, would you like to lose a 'life point' or take an 'arrow'? : ");
-                choice = input.nextLine();
-                
-                choice = choice.toLowerCase();
+        i = 0;
+        
+        doubleDamage = false;
+        dynamiteExecuted = false;
+        gatlingExecuted = false;
+        rollsRemaining = 3;
+        numBullsEye1 = numBullsEye2 = numBeer = numGatling = 0;
+        
+        //Lucky Duke Special ability: Extra Reroll
+        if ("Lucky Duke".equals(playerOrder.get_current_player().name)){
+            rollsRemaining = 4;
+        }
+        
+        if ("Sid Ketchum".equals(playerOrder.get_current_player().name)){
+                System.out.println("Since it is Sid Ketchum's turn, he may serve 1 person a beer.");
+                Dice.beer_roll(playerOrder);
+            }
             
-                while (!"arrow".equals(choice) && !"life point".equals(choice)){
-                    System.out.print("Invalid input. Please enter 'life point' or 'arrow': ");
-                    choice = input.nextLine();
-                    choice = choice.toLowerCase();
+            i = 0;
+            
+            //Rolls all 5 dice
+            while (i < 5){
+                allDice[i].roll_dice();
+                i++;
+            }
+            
+            //Determines if the first roll contains any arrows
+            for (i = 0; i < 5; i ++){
+                if (!playerOrder.game_over){
+                    if ("Arrow".equals(allDice[i].roll)){
+                        System.out.println("You rolled an arrow. You must pick up an arrow before continuing.");
+                        Dice.arrow_roll(playerOrder.get_current_player(), arrowPile, playerOrder);
+                    }
+                    if ("Dynamite".equals(allDice[i].roll)){
+                        if (!dynamiteExecuted){
+                            dynamiteExecuted = Dice.dynamite_roll(allDice, playerOrder.get_current_player(), playerOrder, arrowPile);  
+                        }
+                    }
+                }
+            }
+            
+            
+            //Allows for rerolls, if they roll 3 dynamite, takes care of that
+            while (rollsRemaining > 0 && !dynamiteExecuted){
+                System.out.println("\nYour roll: ");
+                for (i = 0; i < 5; i++){
+                    System.out.println("Dice " + (i+1) + ": " + allDice[i].roll);
+                }
+                rollsRemaining = Dice.reroll_dice(allDice, rollsRemaining, arrowPile, playerOrder);
+                
+                for (i = 0; i < 5; i++){
+                    if ("Dynamite".equals(allDice[i].roll)){
+                        if (!dynamiteExecuted){
+                            dynamiteExecuted = Dice.dynamite_roll(allDice, playerOrder.get_current_player(), playerOrder, arrowPile);
+                        }
+                    }
+                }
+            }
+            
+            //Displays final roll
+            System.out.println("\nYour final roll: ");
+                for (i = 0; i < 5; i++){
+                    System.out.println("Dice " + (i+1) + ": " + allDice[i].roll);
+                }
+            
+            
+            System.out.println();
+            
+            //Completes all of the dice rolls
+            for (i = 0; i < 5; i ++){
+                if (!playerOrder.game_over){
+                    if ("Dynamite".equals(allDice[i].roll)){
+                        if (!dynamiteExecuted){
+                            Dice.dynamite_roll(allDice, playerOrder.get_current_player(), playerOrder, arrowPile);
+                            dynamiteExecuted = true;
+                        }
+                    }
+                    else if ("Bull's Eye 1".equals(allDice[i].roll)){
+                        numBullsEye1 += 1;   
+                    }
+                    else if ("Bull's Eye 2".equals(allDice[i].roll)){
+                        numBullsEye2 += 1;
+                    }
+                    else if ("Beer".equals(allDice[i].roll)){
+                        numBeer += 1;
+                    }
+                    else if("Gatling".equals(allDice[i].roll)){
+                        numGatling += 1;
+                    }
+                }
+            }
+            
+            if ("Suzy Lafayette".equals(playerOrder.get_current_player().name)){
+                if (numBullsEye1 == 0 && numBullsEye2 == 0){
+                    playerOrder.get_current_player().gain_life();
+                    playerOrder.get_current_player().gain_arrow();
+                }
+            }
+            
+            while (numBullsEye1 > 0){
+                if ("Slab the Killer".equals(playerOrder.get_current_player().name)){
+                    if (numBeer > 0){
+                        System.out.print("Would you like to double the damage of your Bull's Eye 1 for 1 beer? (Y/N): ");
+                        input.nextLine();
+                        tempDoubleDamage = input.nextLine().charAt(0);
+                        while (tempDoubleDamage != 'y' && tempDoubleDamage != 'Y' && tempDoubleDamage != 'n' && tempDoubleDamage != 'N'){
+                            System.out.print("Invalid input. Please try again (Y/N): ");
+                            tempDoubleDamage = input.nextLine().charAt(0);
+                        }
+                        if (tempDoubleDamage == 'y' || tempDoubleDamage == 'Y'){
+                            doubleDamage = true;
+                            numBeer -= 1;
+                        }
+                    }
                 }
                 
-                if ("arrow".equals(choice)){
-                    this.gain_arrow();
-                    arrowPile.remove_arrow(playerOrder);
+                Dice.bullsEye1_roll(playerOrder, arrowPile, doubleDamage);
+                numBullsEye1 -= 1;
+                
+                doubleDamage = false;
+            }
+            while (numBullsEye2 > 0){
+                if ("Slab the Killer".equals(playerOrder.get_current_player().name)){
+                    if (numBeer > 0){
+                        System.out.print("Would you like to double the damage of your Bull's Eye 2 for 1 beer? (Y/N): ");
+                        input.nextLine();
+                        tempDoubleDamage = input.nextLine().charAt(0);
+                        while (tempDoubleDamage != 'y' && tempDoubleDamage != 'Y' && tempDoubleDamage != 'n' && tempDoubleDamage != 'N'){
+                            System.out.print("Invalid input. Please try again (Y/N): ");
+                            tempDoubleDamage = input.nextLine().charAt(0);
+                        }
+                        if (tempDoubleDamage == 'y' || tempDoubleDamage == 'Y'){
+                            doubleDamage = true;
+                            numBeer -= 1;
+                        }
+                    }
+                }
+                
+                Dice.bullsEye2_roll(playerOrder, arrowPile, doubleDamage);
+                numBullsEye2 -= 1;
+                
+                doubleDamage = false;
+            }
+            while (numBeer > 0){
+                Dice.beer_roll(playerOrder);
+                numBeer -= 1;
+            }
+            while (numGatling > 0){
+                if (!gatlingExecuted){
+                    Dice.gatling_roll(allDice, playerOrder.get_current_player(), playerOrder, arrowPile);
+                    gatlingExecuted = true;
+                }
+                numGatling -= 1;
+            }
+    }
+    
+    public void eliminate_player (Character player, ArrowPile arrowPile, Boolean killedByPlayer){
+        int i;
+        
+        while(player.arrows > 0){
+                arrowPile.add_arrow(player);
+            }
+        
+        for (i = 0; i < this.numOfPlayers; i++){
+            if (this.playerOrder[i] == player){
+                for (i = i; i < this.numOfPlayers - 1; i++){
+                    this.playerOrder[i] = this.get_next_player();
+                }
+            }
+        }
+        
+        this.playerOrder[this.numOfPlayers] = null;
+        
+        this.numOfPlayers -= 1;
+        
+        this.game_over = this.determine_game_over(this, player, killedByPlayer);
+        
+        if (!this.game_over){
+            for (i = 0; i < this.numOfPlayers; i++){
+                if ("Vulture Sam".equals(this.playerOrder[i].name)){
+                    this.playerOrder[i].gain_life();
+                    this.playerOrder[i].gain_life();
+                }
+            }
+        }
+    }
+    
+    public boolean determine_game_over (GameFunctions playerOrder, Character deadPlayer, Boolean killedByPlayer){
+        if (playerOrder.originalNumOfPlayers == 3){
+            if (killedByPlayer){
+                if (playerOrder.numOfPlayers == 2){
+                    if ("Deputy".equals(playerOrder.get_current_player().role) && "Renegade".equals(deadPlayer.role)){
+                        System.out.println("The sheriff has killed the renegade and has won the game.");
+                        return true;
+                    }
+                    else if ("Renegade".equals(playerOrder.get_current_player().role) && "Outlaw".equals(deadPlayer.role)){
+                        System.out.println("The renegade has killed the outlaw and has won the game.");
+                        return true;
+                    }
+                    else if ("Outlaw".equals(playerOrder.get_current_player().role) && "Deputy".equals(deadPlayer.role)){
+                        System.out.println("The outlaw has killed the deputy and has won the game.");
+                        return true;
+                    }
+                    else {
+                        System.out.println(deadPlayer.name + " has been killed. The winner will be decided by who is the last alive.");
+                        return false;
+                    }
                 }
                 else {
-                    this.lifePoints -= 1;
+                    System.out.println(deadPlayer.name + " has been killed. The winner of the game is " + playerOrder.get_current_player().name);
+                    return true;
+                }
+            }
+            else {
+                if (playerOrder.numOfPlayers == 2){
+                    System.out.println(deadPlayer.name + " has died. The winner will be decided by who is the last alive.");
+                    return false;
+                }
+                else {
+                    System.out.println(deadPlayer.name + " has died. The winner of the game is " + playerOrder.get_current_player().name);
+                    return true;
                 }
             }
         }
         
-        else{ 
-            this.lifePoints -= 1;
-        }
+        else {
+            int sheriffAlive = 0;
+            int outlawAlive = 0;
+            int renegadeAlive = 0;
+            int i;
         
-        if ("Pedro Ramirez".equals(this.name)){
-            if (this.arrows > 0){
-                arrowPile.add_arrow(this);
-                System.out.println("Pedro Ramirez lost a life point, so he discarded an arrow.");
+            for (i = 0; i < playerOrder.numOfPlayers; i++){
+                if ("Sheriff".equals(playerOrder.playerOrder[i].role)){
+                    sheriffAlive += 1;
+               }
+                else if ("Outlaw".equals(playerOrder.playerOrder[i].role)){
+                    outlawAlive += 1;
+                }
+                else if ("Renegade".equals(playerOrder.playerOrder[i].role)){
+                    renegadeAlive += 1;
+                }
             }
-        }
         
-        if (this.lifePoints < 1){
-            System.out.println(this.name + " has run out of life points and has lost the game.");
-            System.out.println("Their role was " + this.role);
-            playerOrder.eliminate_player(this, arrowPile, !arrowOrDynamite);
+            if ((sheriffAlive == 1) && (outlawAlive == 0) && (renegadeAlive == 0)){
+                System.out.println("All renegades and outlaws are dead, so the sheirff and deputies win.");
+                return true;
+            }
+            else if (sheriffAlive == 0){
+                if ((playerOrder.numOfPlayers == 1) && (renegadeAlive == 1)){
+                    System.out.println("The renegade is the last one alive, so they win.");
+                    return true;
+                }
+                else {
+                    System.out.println("The sheriff is dead, so the outlaws win.");
+                    return true;
+                }
+            }
+            else if (playerOrder.numOfPlayers == 0){
+                System.out.println("All players are dead, so the outlaws win.");
+                    return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 }
