@@ -428,20 +428,43 @@ public class Dice {
         }
         
         if ("Kit Carlson".equals(player.name)){
-            while (tempCount > 0){
+            int playersWithArrows = 0;
+            
+            for (i = 0; i < playerOrder.numOfPlayers; i++){
+                if (playerOrder.playerOrder[i].arrows > 0){
+                    playersWithArrows += 1;
+                }
+            }
+            
+            while (tempCount > 0 && playersWithArrows > 0){
                 System.out.print("Kit Carlson, you rolled a gatling, which player would you like to remove an arrow from? (You may enter your own name): ");
                 enteredPlayer = input.nextLine();
                 
                 while (!removedArrow){
                     for (i = 0; i < playerOrder.numOfPlayers; i ++){
                         if (enteredPlayer.equals(playerOrder.playerOrder[i].name)){
-                            playerOrder.playerOrder[i].lose_arrow();
-                            removedArrow = true;
+                            if (playerOrder.playerOrder[i].arrows > 0){
+                               playerOrder.playerOrder[i].lose_arrow();
+                               removedArrow = true;
+                               tempCount -= 1;
+                            }
+                            else{
+                                System.out.print("Entered character does not have any arrows to remove");
+                                removedArrow = true;
+                            }
                         }
                     }
-                    while (!removedArrow){
+                    if (!removedArrow){
                         System.out.print("Could not find character name. Please try again: ");
                         enteredPlayer = input.nextLine();
+                    }
+                }
+                
+                playersWithArrows = 0;
+                
+                for (i = 0; i < playerOrder.numOfPlayers; i++){
+                    if (playerOrder.playerOrder[i].arrows > 0){
+                        playersWithArrows += 1;
                     }
                 }
                 removedArrow = false;
