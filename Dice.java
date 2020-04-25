@@ -159,11 +159,6 @@ public class Dice {
             System.out.println("You shot " + nextPlayer.name + ".");
             nextPlayer.lose_life(playerOrder, arrowPile, false);
             
-            //NEW CODE
-            if ("Sheriff".equals(nextPlayer.role)){
-                playerOrder.get_current_player().numShotSheriff += 1;
-            }
-            
             if (doubleDamage){
                 nextPlayer.lose_life(playerOrder, arrowPile, false);
             }
@@ -237,11 +232,6 @@ public class Dice {
             enteredPlayer = "";
             System.out.println("You shot " + nextPlayer.name + ".");
             nextPlayer.lose_life(playerOrder, arrowPile, false);
-            
-            //NEW CODE
-            if ("Sheriff".equals(nextPlayer.role)){
-                playerOrder.get_current_player().numShotSheriff += 1;
-            }
             
             if (doubleDamage){
                     nextPlayer.lose_life(playerOrder, arrowPile, false);
