@@ -159,6 +159,11 @@ public class Dice {
             System.out.println("You shot " + nextPlayer.name + ".");
             nextPlayer.lose_life(playerOrder, arrowPile, false);
             
+            //NEW CODE
+            if ("Sheriff".equals(nextPlayer.role)){
+                playerOrder.get_current_player().numShotSheriff += 1;
+            }
+            
             if (doubleDamage){
                 nextPlayer.lose_life(playerOrder, arrowPile, false);
             }
@@ -191,6 +196,11 @@ public class Dice {
             if (enteredPlayer.equals(nextPlayer.name)){
                 nextPlayer.lose_life(playerOrder, arrowPile, false);
                 
+                //NEW CODE
+                if ("Sheriff".equals(nextPlayer.role)){
+                    playerOrder.get_current_player().numShotSheriff += 1;
+                }
+                
                 if (doubleDamage){
                     nextPlayer.lose_life(playerOrder, arrowPile, false);
                 }
@@ -198,10 +208,16 @@ public class Dice {
             else if (enteredPlayer.equals(previousPlayer.name)){
                 previousPlayer.lose_life(playerOrder, arrowPile, false);
                 
+                //NEW CODE
+                if ("Sheriff".equals(previousPlayer.role)){
+                    playerOrder.get_current_player().numShotSheriff += 1;
+                }
+                
                 if (doubleDamage){
                     previousPlayer.lose_life(playerOrder, arrowPile, false);
                 }
-            } 
+            }
+            
         }
         
         if ("El Gringo".equals(enteredPlayer)){
@@ -221,6 +237,11 @@ public class Dice {
             enteredPlayer = "";
             System.out.println("You shot " + nextPlayer.name + ".");
             nextPlayer.lose_life(playerOrder, arrowPile, false);
+            
+            //NEW CODE
+            if ("Sheriff".equals(nextPlayer.role)){
+                playerOrder.get_current_player().numShotSheriff += 1;
+            }
             
             if (doubleDamage){
                     nextPlayer.lose_life(playerOrder, arrowPile, false);
@@ -255,12 +276,22 @@ public class Dice {
             if (enteredPlayer.equals(nextPlayer.name)){
                 nextPlayer.lose_life(playerOrder, arrowPile, false);
                 
+                //NEW CODE
+                if ("Sheriff".equals(nextPlayer.role)){
+                    playerOrder.get_current_player().numShotSheriff += 1;
+                }
+                
                 if (doubleDamage){
                     nextPlayer.lose_life(playerOrder, arrowPile, false);
                 }
             }
             else if (enteredPlayer.equals(previousPlayer.name)){
                 previousPlayer.lose_life(playerOrder, arrowPile, false);
+                
+                //NEW CODE
+                if ("Sheriff".equals(previousPlayer.role)){
+                    playerOrder.get_current_player().numShotSheriff += 1;
+                }
                 
                 if (doubleDamage){
                     previousPlayer.lose_life(playerOrder, arrowPile, false);
@@ -400,10 +431,16 @@ public class Dice {
             for (i = 0; i < playerOrder.numOfPlayers; i ++){
                 if (enteredCharacter.equals(playerOrder.playerOrder[i].name)){
                     playerOrder.playerOrder[i].gain_life();
+                    
+                    //NEW CODE
+                    if ("Sheriff".equals(playerOrder.playerOrder[i].role)){
+                        playerOrder.get_current_player().numHelpSheriff += 1;
+                    }
+                    
                     servedBeer = true;
                 }
             }
-            while (!servedBeer){
+            if (!servedBeer){
                 System.out.print("Could not find character name. Please try again: ");
                 enteredCharacter = input.nextLine();
             }
@@ -481,6 +518,11 @@ public class Dice {
             for (i = 0; i < playerOrder.numOfPlayers; i++){
                 if ((playerOrder.playerOrder[i] != player) && (!"Paul Regret".equals(playerOrder.playerOrder[i].name))){
                     playerOrder.playerOrder[i].lose_life(playerOrder, arrowPile, false);
+                    
+                    // NEW CODE
+                    //if ("Sheriff".equals(playerOrder.playerOrder[i].role)){
+                    //    playerOrder.get_current_player().numShotSheriff += 1;
+                    //}
                     
                     if ("El Gringo".equals(playerOrder.playerOrder[i].name)){
                         arrowPile.remove_arrow(playerOrder);
