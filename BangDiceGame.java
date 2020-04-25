@@ -10,6 +10,15 @@ import java.util.Scanner;
  *
  * @author cmdma
  */
+
+/**
+ *Changes made by SAS:
+ *called AI class
+ * players[0] is the user controlled player
+ * all others are AI -> created character class with isAI attribute
+ * 
+ */
+
 public class BangDiceGame {
 
     /**
@@ -26,7 +35,6 @@ public class BangDiceGame {
         Dice [] allDice = new Dice [5];
         ArrowPile arrowPile = new ArrowPile();
         
-
         
         randomSelection = Character.shuffle_character(randomSelection);
         
@@ -43,12 +51,14 @@ public class BangDiceGame {
         totalPlayers = aiPlayers + 1;
         
         roles = Character.select_role(aiPlayers);
-        
         int i = 0;
-        
+        boolean isAi = false;
         //Creates all of the players
+        System.out.println();
         while (aiPlayers >= 0){
-            players[i] = new Character(randomSelection[aiPlayers]);
+        	if (i>0)
+        		isAi = true;
+            players[i] = new Character(randomSelection[aiPlayers],isAi);
             players[i].set_role(roles[i]);
             
             //Increases life points if they are the sheriff
@@ -60,6 +70,8 @@ public class BangDiceGame {
             //Temporary output, just showing players and order
             System.out.println("Player " + i + " name is: " + players[i].name);
             System.out.println("Player " + i + " role is: " + players[i].role);
+            System.out.println("Player " + i + " is an AI? " + players[i].isAi);
+            System.out.println();
             aiPlayers -= 1;
             i += 1;
         }
@@ -81,6 +93,8 @@ public class BangDiceGame {
         //
         
         i = 0;
+        //SAS added
+        AI ai = new AI(totalPlayers);
         
         //Making the sheriff the first player to go
         if (playerOrder.numOfPlayers > 3){
@@ -92,23 +106,22 @@ public class BangDiceGame {
         
         System.out.println();
         
-        
-        
         while (!playerOrder.game_over){
             System.out.println();
             
             //Prints players current turn
             System.out.println("It is currently " + playerOrder.get_current_player().name + "'s turn\n");
-            
+            //players[0] is the user controlled player
             if (playerOrder.get_current_player() == players[0]){
                 GameFunctions.player_turn(playerOrder, allDice, arrowPile);
             }
             else{
                 // AI turn goes here
+                // 
                 //
                 //
-                //
-                //
+            	System.out.println("AI turn");
+            	
             }
             
             System.out.println("\nThe current standings are: ");
@@ -120,11 +133,9 @@ public class BangDiceGame {
             
             //Goes to next player
             playerOrder.next_turn();
-            
             input.nextLine();
             System.out.println("\n*** Press enter to progress to the next turn. ***");
             input.nextLine();
-            
             System.out.println("\n--------------------------------------------------\n");
         }
     }
