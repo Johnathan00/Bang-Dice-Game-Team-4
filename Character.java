@@ -8,20 +8,22 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *Changes made by SAS:
- *included isAi boolean in attributes and constructor
+ *
  * 
  */
 
 public class Character {
-    public int lifePoints, arrows, maxLife;
+    public int lifePoints, arrows, maxLife, numShotSheriff, numHelpSheriff;
     public String name, role;
-    public boolean isAi;
     
-    public Character(int selection, boolean isAI){
+    
+    public Character(int selection){
         this.arrows = 0;
         this.role = "";
-        this.isAi = isAI;
+        //NEW CODE
+        this.numShotSheriff = 0;
+        this.numHelpSheriff = 0;
+        
         
         switch (selection){
             case 1:
