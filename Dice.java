@@ -519,11 +519,6 @@ public class Dice {
                 if ((playerOrder.playerOrder[i] != player) && (!"Paul Regret".equals(playerOrder.playerOrder[i].name))){
                     playerOrder.playerOrder[i].lose_life(playerOrder, arrowPile, false);
                     
-                    // NEW CODE
-                    //if ("Sheriff".equals(playerOrder.playerOrder[i].role)){
-                    //    playerOrder.get_current_player().numShotSheriff += 1;
-                    //}
-                    
                     if ("El Gringo".equals(playerOrder.playerOrder[i].name)){
                         arrowPile.remove_arrow(playerOrder);
                         System.out.println(playerOrder.get_current_player().name + " made El Gringo lose a life point, so they have taken an arrow.");
