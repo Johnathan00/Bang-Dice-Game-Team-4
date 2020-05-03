@@ -8,6 +8,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * Deals with functions of the game, such as getting next player and determining win conditions
+ */
+
+
+/*
  *purpose:
  *lets user control a player
  *must communicate with table

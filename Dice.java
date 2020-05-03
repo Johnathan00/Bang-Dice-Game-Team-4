@@ -8,6 +8,10 @@ import static java.lang.Character.toLowerCase;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Builds and takes care of dice actions for human player
+ */
+
 public class Dice {
 
     /**

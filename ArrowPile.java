@@ -1,10 +1,13 @@
 /*
  * Cierra Ditmore
  * CS 2365
- * Note: double check your remove_arrow method
  */
 package bangdicegame;
 import java.util.Scanner;
+
+/**
+ * Builds the arrow pile for use throughout game, and takes care of any arrow based actions
+ */
 
 public class ArrowPile {
 

@@ -8,37 +8,128 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * Houses all AI player information and simulates their turns
+ */
+
 public class AI {
 	//Behavior defining parameters
+        /**
+         * value equivalent to their willingness to trick other players
+         */
 	private final double willingToTrick;
+        /**
+         * value equivalent to their aggressiveness
+         */
 	private final double Aggressiveness;
+        /**
+         * value equivalent to their likelihood to play safe
+         */
 	private final double Safetiness;
+        /**
+         * value equivalent to their likelihood to be nice
+         */
 	private final double Niceness;
+        /**
+         * value equivalent to their likelihood to keep dice
+         */
 	private final double willingToKeepDice;
+        /**
+         * value equivalent to their likelihood to keep health
+         */
 	private final double willingToKeepHealth;
+        /**
+         * value equivalent to their likelihood to keep shots
+         */
 	private final double willingToKeepShots;
+        /**
+         * value equivalent to their likelihood to keep arrows
+         */
 	private final double willingToKeepArrow;
+        /**
+         * value equivalent to their likelihood to keep gatling
+         */
 	private final double willingToKeepGatling;
+        /**
+         * value equivalent to their likelihood to be a skeptic
+         */
 	private final double SkepticProbability;
+        /**
+         * value equivalent to their likelihood to keep normal dice
+         */
 	private final double willingToKeepNormalDice;
+        /**
+         * value equivalent to their likelihood to keep coward dice
+         */
 	private final double willingToKeepCowardDice;
+        /**
+         * value equivalent to their likelihood to keep broken arrow
+         */
 	private final double willingToKeepBrokenArrow;
+        /**
+         * value equivalent to their likelihood to keep a fight roll
+         */
 	private final double willingToKeepFight;
+        /**
+         * value equivalent to their likelihood to keep a bullet roll
+         */
 	private final double willingToKeepBullet;
 
+        /**
+         * AI name
+         */
 	private final String name;
-	private final String role;     
+        /**
+         * AI role
+         */
+	private final String role;  
+        /**
+         * array list of their target roles based on player role
+         */
 	private ArrayList<String> targetRole;
+        /**
+         * array list of dice results for each roll
+         */
 	private ArrayList<String> diceResults;
+        /**
+         * array list for kept dice after each roll
+         */
 	private ArrayList<String> keptDice;
+        /**
+         * the amount of health they have
+         */
 	private int health;
+        /**
+         * how much health will be subtracted
+         */
 	private final int subtractHealth = 5;
-	private final int thresholdHealth;  
+        /**
+         * threshold health for decision making
+         */
+	private final int thresholdHealth; 
+        /**
+         * position in player order array
+         */
 	private int position;
+        /**
+         * total number of players
+         */
 	private final int totalPlayers;
+        /**
+         * total number of players alive
+         */
 	private int playersAlive;
+        /**
+         * max amount of dice rerolls
+         */
 	private int maxRolls = 3;
+        /**
+         * number of players started with
+         */
 	private int startedWith;
+        /**
+         * gameFunctions object
+         */
         private GameFunctions game;
 
     /**

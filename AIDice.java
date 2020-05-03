@@ -1,11 +1,9 @@
 package bangdicegame;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 /**
- *
- * @author cmdma
+ * Builds dice and completes their actions for AI players
  */
 public class AIDice {
 

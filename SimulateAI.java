@@ -7,6 +7,11 @@ package bangdicegame;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Initializes the AI turn, probabilities, and goes through AI turn
+ */
+
+
 /*
  * Purpose: 
  * arranges all players in an array 

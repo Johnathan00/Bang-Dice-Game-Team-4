@@ -7,6 +7,13 @@ package bangdicegame;
 import java.util.Scanner;
 
 /**
+ * Contains Main, starts and runs the program
+ * 
+ */
+
+
+
+/*
  *  Changes made by SAS:
  *  called AI class
  *  players[0] is the user controlled player

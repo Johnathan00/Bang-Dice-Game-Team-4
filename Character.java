@@ -10,6 +10,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
+ * Builds each character with their attributes, and takes care of character based actions
+ */
+
+
+/*
  *Changes made by SAS:
  *included isAi boolean in attributes and constructor
  *included shotSheriff
